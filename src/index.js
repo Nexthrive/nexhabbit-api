@@ -16,9 +16,10 @@ const connectDB = async () => {
   }
 };
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/users", userRoutes);
+const friendRoutes = require("./routes/friendRouter");
+app.use("/api/friends", friendRoutes);
 
 connectDB().then(() => {
   app.listen(port, () => {
