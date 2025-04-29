@@ -1,18 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const TodoItemSchema = new mongoose.Schema({
+const TodoItemSchema = new mongoose.Schema(
+  {
     todoId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Todo'
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Todo",
     },
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     desc: {
-        type: String
-    }
-}, { timestamps: true });
-
-module.exports = mongoose.model('TodoItem', TodoItemSchema);
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
+scheduleSchema.virtual("todo", {
+  ref: "Todo",
+  localField: "_id",
+  foreignField: "todoId",
+});
+module.exports = mongoose.model("TodoItem", TodoItemSchema);

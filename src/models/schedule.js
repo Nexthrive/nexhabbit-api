@@ -25,18 +25,19 @@ const scheduleSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Todo",
     },
+    startTime: {
+      type: datetime,
+      required: true,
+    },
+    endTime: {
+      type: datetime,
+      required: true,
+    },
   },
   {
     timestamps: true, // Add timestamps for better tracking
   }
 );
-
-// Virtual for category relationship
-scheduleSchema.virtual("category", {
-  ref: "Category",
-  localField: "categoryId", // Should be categoryId instead of _id
-  foreignField: "_id", // Should reference Category _id
-});
 
 const Schedule = mongoose.model("Schedule", scheduleSchema);
 
