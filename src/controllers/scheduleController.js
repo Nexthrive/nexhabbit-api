@@ -10,7 +10,10 @@ const createSchedule = async (req, res) => {
     title: req.body.title,
     desc: req.body.desc,
     scheduleDate: req.body.scheduleDate,
+    scheduleDateEnd: req.body.scheduleDateEnd,
+
     startTime: req.body.start,
+
     categoryId: categoryId,
     privacy: req.body.privacy,
     endTime: req.body.end,
