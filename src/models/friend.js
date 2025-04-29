@@ -12,8 +12,12 @@ const friendSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "accepted", "rejected"],
+    enum: ["pending", "accepted", "canceled"],
     default: "pending",
+  },
+  canceledAt: {
+    type: Date,
+    default: null,
   },
 });
 friendSchema.index({ userId: 1, friendId: 1 }, { unique: true });

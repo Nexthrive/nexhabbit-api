@@ -9,7 +9,7 @@ const scheduleSchema = new mongoose.Schema({
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Category", // Reference to the Category model
+    ref: "Category",
   },
   privacy: {
     type: Boolean,
@@ -17,13 +17,30 @@ const scheduleSchema = new mongoose.Schema({
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the User model
+    ref: "User",
+    required: true, // userId should be required since each schedule needs an owner
   },
-  todoId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Todo", // Reference to the Todo model
+  scheduleDate: {
+    type: Date,
+    required: true,
+  },
+  startTime: {
+    type: String,
+    required: true,
+    match: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, // Validates time format HH:mm (24-hour)
+  },
+  endTime: {
+    type: String,
+    required: true,
+    match: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, // Validates time format HH:mm (24-hour)
   },
 });
+scheduleSchema.virtual("schedule", {
+  ref: "Schedule",
+  localField: "_id",
+  foreignField: "scheduleId",
+});
+
 const Schedule = mongoose.model("Schedule", scheduleSchema);
 
 module.exports = Schedule;
