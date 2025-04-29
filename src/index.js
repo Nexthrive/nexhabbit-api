@@ -16,10 +16,14 @@ const connectDB = async () => {
   }
 };
 
+// Emo
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
 const friendRoutes = require("./routes/friendRouter");
 app.use("/api/friends", friendRoutes);
+// Not Emo
+const categroyRoutes = require("./routes/categoryRouter");
+app.use("/api/category", categroyRoutes);
 
 connectDB().then(() => {
   app.listen(port, () => {
