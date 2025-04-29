@@ -1,8 +1,23 @@
-const Note = require("/models/Note");
+const Note = require("../models/Note");
+const User = require("../models/User");
+const Category = require("../models/Category");
 
 exports.createNote = async (req, res) => {
   try {
-    const note = new Note(req.body);
+    if (req.body.categoryId) {
+      const categoryExists = await Category.findById(req.body.categoryId);
+      if (!categoryExists) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+    }
+
+    const note = new Note({
+      title: req.body.title,
+      content: req.body.content,
+      categoryId: req.body.categoryId,
+      userId: req.user._id, // Get userId from authenticated user
+    });
+    
     await note.save();
     res.status(201).json(note);
   } catch (err) {
@@ -12,7 +27,12 @@ exports.createNote = async (req, res) => {
 
 exports.getNotes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find({ userId: req.user._id });
+    
+    if (notes.length === 0) {
+      return res.json({ message: "no notes found" });
+    }
+    
     res.json(notes);
   } catch (err) {
     res.status(500).json({ error: err.message });

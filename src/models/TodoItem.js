@@ -17,7 +17,7 @@ const TodoItemSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-scheduleSchema.virtual("todo", {
+TodoItemSchema.virtual("todo", {
   ref: "Todo",
   localField: "_id",
   foreignField: "todoId",

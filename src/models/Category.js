@@ -12,12 +12,12 @@ const CategorySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-scheduleSchema.virtual("schedule", {
+CategorySchema.virtual("schedule", {
   ref: "Schedule",
   localField: "_id",
   foreignField: "categoryId",
 });
-scheduleSchema.virtual("note", {
+CategorySchema.virtual("note", {
   ref: "Note",
   localField: "_id",
   foreignField: "categoryId",

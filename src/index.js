@@ -21,9 +21,18 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
 const friendRoutes = require("./routes/friendRouter");
 app.use("/api/friends", friendRoutes);
+const scheduleRouter = require("./routes/scheduleRouter");
+app.use("/api/schedule", scheduleRouter);
+
 // Not Emo
 const categroyRoutes = require("./routes/categoryRouter");
 app.use("/api/category", categroyRoutes);
+const todoRouter = require("./routes/todoRouter");
+app.use("/api/todo", todoRouter);
+const todoItemRouter = require("./routes/todoItemsRouter");
+app.use("/api/todoItem", todoItemRouter);
+const noteRouter = require("./routes/noteRouter");
+app.use("/api/noteRouter", noteRouter);
 
 connectDB().then(() => {
   app.listen(port, () => {
