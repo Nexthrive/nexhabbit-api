@@ -24,6 +24,10 @@ const scheduleSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  scheduleDateEnd: {
+    type: Date,
+    required: true,
+  },
   startTime: {
     type: String,
     required: true,
